@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-void set_wifi_ap(char* ssid, uint8_t wifi_channel);
+void set_wifi_ap(const char* ssid, uint8_t wifi_channel);
 
 #ifdef __cplusplus
 extern "C" {

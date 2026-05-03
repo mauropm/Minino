@@ -173,6 +173,6 @@ esp_ble_adv_params_t bt_gatts_set_default_ble_adv_params();
 esp_ble_adv_data_t bt_gatts_set_default_ble_scan_rsp();
 esp_ble_adv_data_t bt_gatts_set_default_ble_adv_data();
 esp_attr_value_t bt_gatts_set_default_char_val();
-void bt_gatts_set_ble_adv_data_params();
+void bt_gatts_set_ble_adv_data_params(gatts_adv_params_t* adv_params);
 void bt_gatts_set_cb(bt_server_event_cb_t event_cb);
 #endif  // BT_GATTS_H

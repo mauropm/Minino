@@ -48,7 +48,7 @@ void wifi_driver_ap_start(wifi_config_t* wifi_ap_config) {
     wifi_driver_init_apsta();
   }
 
-  err = esp_wifi_set_config(ESP_IF_WIFI_AP, wifi_ap_config);
+    err = esp_wifi_set_config(WIFI_IF_AP, wifi_ap_config);
   if (err != ESP_OK) {
     ESP_LOGE(TAG_WIFI_DRIVER,
              "Error setting WiFi Access Point configuration: %s",
@@ -65,7 +65,7 @@ void wifi_driver_ap_stop(void) {
   wifi_config_t wifi_ap_config = {
       .ap = {.max_connection = 0},
   };
-  ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &wifi_ap_config));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_ap_config));
   ESP_LOGI(TAG_WIFI_DRIVER, "WiFi Access Point stopped");
 }
 

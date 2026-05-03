@@ -1,3 +1,5 @@
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include "general_animations.h"
 #include "oled_screen.h"
 

@@ -58,9 +58,9 @@ static int cmd_catdos_web_set_config(int argc, char** argv) {
   assert(cmd_catdos_web_args.endpoint->count == 1);
   const char* host = cmd_catdos_web_args.host->sval[0];
   const char* port = cmd_catdos_web_args.port->sval[0];
-  const char* endpoint = cmd_catdos_web_args.endpoint->sval[0];
+  const char* endpoint = (const char*)cmd_catdos_web_args.endpoint->sval[0];
 
-  catdos_module_set_target(host, port, endpoint);
+  catdos_module_set_target((char*)host, (char*)(port), (char*)(endpoint));
   return 0;
 }
 

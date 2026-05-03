@@ -46,7 +46,7 @@ void oled_screen_display_show();
  *
  * @return void
  */
-void oled_screen_display_text(char* text, int x, int page, bool invert);
+void oled_screen_display_text(const char* text, int x, int page, bool invert);
 
 /**
  * @brief Display the text on the center of the OLED display
@@ -55,7 +55,7 @@ void oled_screen_display_text(char* text, int x, int page, bool invert);
  * @param page Page to display the text on the OLED display
  * @param invert Invert the background and foreground color of the OLED display
  */
-void oled_screen_display_text_center(char* text, int page, bool invert);
+void oled_screen_display_text_center(const char* text, int page, bool invert);
 
 /**
  * @brief Clear a line on the OLED display

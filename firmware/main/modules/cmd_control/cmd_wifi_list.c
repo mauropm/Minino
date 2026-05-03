@@ -5,7 +5,7 @@
 
 static wifi_scanner_ap_records_t* ap_records;
 
-static void cmd_wifi_run_scan_task() {
+static void cmd_wifi_run_scan_task(void *pvParameters) {
   uint8_t scan_count = 0;
   ap_records = wifi_scanner_get_ap_records();
   while (ap_records->count < (DEFAULT_SCAN_LIST_SIZE / 2)) {
@@ -19,8 +19,8 @@ static void cmd_wifi_run_scan_task() {
   vTaskDelete(NULL);
 }
 
-static int cmd_wifi_scan() {
-  xTaskCreate(cmd_wifi_run_scan_task, "wifi_scan", 8096, NULL, 5, NULL);
+static int cmd_wifi_scan(int argc, char** argv) {
+  xTaskCreate((TaskFunction_t)cmd_wifi_run_scan_task, "wifi_scan", 8096, NULL, 5, NULL);
   return 0;
 }
 
@@ -30,7 +30,7 @@ void cmd_wifi_list_register_commands() {
       .help = "Scan for SSID",
       .category = NULL,
       .hint = NULL,
-      .func = &cmd_wifi_scan,
+      .func = cmd_wifi_scan,
       .argtable = NULL,
   };
 

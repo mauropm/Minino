@@ -62,7 +62,6 @@
 #if ID_OD_WIFI
 
   #include <esp_event.h>
-  #include <esp_event_loop.h>
   #include <esp_system.h>
   #include <esp_wifi.h>
   #include <esp_wifi_types.h>
@@ -141,12 +140,12 @@ void construct2() {
  *
  */
 
-void set_wifi_ap(char* ssid, uint8_t wifi_channel) {
+void set_wifi_ap(const char* ssid, uint8_t wifi_channel) {
 #if ID_OD_WIFI
   if (!wifi_initialized) {
     return;
   }
-  wifi_config_t wifi_manager_config = {0};
+  wifi_config_t wifi_manager_config = {};
   strcpy((char*) wifi_manager_config.ap.ssid, ssid);
   strcpy((char*) wifi_manager_config.ap.password, password);
   wifi_manager_config.ap.ssid_len = strlen(ssid);
@@ -232,7 +231,7 @@ void init_w(char* ssid,
   ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(wifi_power));
 
   // Establece el ancho de banda del canal
-  ESP_ERROR_CHECK(esp_wifi_set_bandwidth(WIFI_IF_AP, WIFI_BW_HT20));
+  ESP_ERROR_CHECK(esp_wifi_set_bandwidth(WIFI_IF_AP, WIFI_BW20));
 
   // Desactiva el modo de ahorro de energía
   ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));

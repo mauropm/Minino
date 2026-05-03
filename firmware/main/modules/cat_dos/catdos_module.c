@@ -476,11 +476,11 @@ static void catdos_module_set_menu_selector(uint8_t option) {
 }
 
 void catdos_module_begin() {
-  oled_screen_clear(OLED_DISPLAY_NORMAL);
+  oled_screen_clear();
   oled_screen_display_text_center("THIS APP STILL", 0, OLED_DISPLAY_INVERT);
   oled_screen_display_text_center("IN BETA", 1, OLED_DISPLAY_INVERT);
   vTaskDelay(2000 / portTICK_PERIOD_MS);
-  oled_screen_clear(OLED_DISPLAY_NORMAL);
+  oled_screen_clear();
   oled_screen_display_text_center("CATDOS", 0, OLED_DISPLAY_NORMAL);
   show_dos_commands();
 

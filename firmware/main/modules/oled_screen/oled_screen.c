@@ -87,7 +87,7 @@ void oled_screen_clear_buffer() {
   xSemaphoreGive(oled_mutex);
 }
 
-void oled_screen_display_text(char* text, int x, int page, bool invert) {
+void oled_screen_display_text(const char* text, int x, int page, bool invert) {
   if (text == NULL) {
     ESP_LOGE(TAG, "Text is NULL");
     return;
@@ -99,11 +99,11 @@ void oled_screen_display_text(char* text, int x, int page, bool invert) {
   }
 
   xSemaphoreTake(oled_mutex, portMAX_DELAY);
-  oled_driver_display_text(&dev, page, text, _x, invert);
+  oled_driver_display_text(&dev, page, (char*)text, _x, invert);
   xSemaphoreGive(oled_mutex);
 }
 
-void oled_screen_display_text_center(char* text, int page, bool invert) {
+void oled_screen_display_text_center(const char* text, int page, bool invert) {
   if (text == NULL) {
     ESP_LOGE(TAG, "Text is NULL");
     return;
@@ -135,7 +135,7 @@ void oled_screen_buffer_bitmap(const uint8_t* bitmap,
                                int height,
                                bool invert) {
   xSemaphoreTake(oled_mutex, portMAX_DELAY);
-  oled_driver_bitmaps(&dev, x, y, bitmap, width, height, invert);
+  oled_driver_bitmaps(&dev, x, y, (uint8_t*)bitmap, width, height, invert);
   xSemaphoreGive(oled_mutex);
 }
 
@@ -146,7 +146,7 @@ void oled_screen_display_bitmap(const uint8_t* bitmap,
                                 int height,
                                 bool invert) {
   xSemaphoreTake(oled_mutex, portMAX_DELAY);
-  oled_driver_bitmaps(&dev, x, y, bitmap, width, height, invert);
+  oled_driver_bitmaps(&dev, x, y, (uint8_t*)bitmap, width, height, invert);
   xSemaphoreGive(oled_mutex);
 }
 
@@ -157,8 +157,8 @@ void oled_screen_display_bmp_text(const uint8_t* bitmap,
                                   int height,
                                   bool invert) {
   xSemaphoreTake(oled_mutex, portMAX_DELAY);
-  oled_driver_bitmaps(&dev, 0, (page * height), bitmap, width, height, !invert);
-  oled_driver_display_text(&dev, page, text, width + 8, invert);
+  oled_driver_bitmaps(&dev, 0, (page * height), (uint8_t*)bitmap, width, height, !invert);
+  oled_driver_display_text(&dev, page, (char*)text, width + 8, invert);
   xSemaphoreGive(oled_mutex);
 }
 

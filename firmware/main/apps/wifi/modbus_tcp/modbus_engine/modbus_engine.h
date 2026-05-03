@@ -16,7 +16,7 @@ typedef struct {
 
 void modbus_engine_begin();
 
-void modbus_engine_set_server(char* ip, int port);
+void modbus_engine_set_server(const char* ip, int port);
 int modbus_engine_connect();
 void modbus_engine_disconnect();
 

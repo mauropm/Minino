@@ -1,3 +1,3 @@
 idf_component_register(SRCS "uart_bridge.c"
-                    REQUIRES driver
-                    INCLUDE_DIRS "include")
+    REQUIRES driver esp_driver_uart
+    INCLUDE_DIRS "include")

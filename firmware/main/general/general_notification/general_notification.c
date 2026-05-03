@@ -29,7 +29,7 @@ static void draw_notification() {
                                   OLED_DISPLAY_NORMAL);
   page++;
   if (strlen(notification_ctx->body) > MAX_LINE_CHAR) {
-    oled_screen_display_text_splited(notification_ctx->body, &page,
+    oled_screen_display_text_splited((char*)notification_ctx->body, &page,
                                      OLED_DISPLAY_NORMAL);
     oled_screen_display_show();
     return;

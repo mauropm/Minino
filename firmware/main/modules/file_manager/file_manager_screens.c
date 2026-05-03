@@ -1,11 +1,14 @@
+#define MAX_ITEMS_NUM 10
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+#include <stdlib.h>
 #include "file_manager_screens.h"
 #include "oled_screen.h"
 
 #ifdef CONFIG_RESOLUTION_128X64
-  #define MAX_ITEMS_NUM 8
   #define ITEMOFFSET    1
 #else  // CONFIG_RESOLUTION_128X32
-  #define MAX_ITEMS_NUM 4
   #define ITEMOFFSET    1
 #endif
 

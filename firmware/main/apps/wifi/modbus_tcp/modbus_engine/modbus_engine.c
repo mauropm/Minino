@@ -50,7 +50,7 @@ void modbus_engine_set_request(uint8_t* request, size_t request_len) {
   modbus_tcp_prefs_set_req(request, request_len);
 }
 
-void modbus_engine_set_server(char* ip, int port) {
+void modbus_engine_set_server(const char* ip, int port) {
   if (!modbus_engine) {
     modbus_engine_begin();
     if (!modbus_engine) {

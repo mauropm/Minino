@@ -1,3 +1,4 @@
+#include <string.h>
 #include "bt_gattc.h"
 #include "esp_bt.h"
 #include "esp_log.h"

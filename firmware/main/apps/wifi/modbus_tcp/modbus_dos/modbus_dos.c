@@ -17,7 +17,7 @@ static const char* TAG = "MODBUS_TCP";
 static esp_netif_t* wifi_netif;
 static volatile bool is_running = false;
 static int modbus_tcp_connect(uint16_t port, char* ip);
-static void modbus_tcp_request(int sock, uint8_t* pkt, size_t pkt_len);
+static void modbus_tcp_request(int sock, const uint8_t* pkt, size_t pkt_len);
 void reading_task();
 
 static int skt;
@@ -63,7 +63,7 @@ static void wifi_event_handler(void* arg,
     // }
     // reading_task();
 
-    xTaskCreate(reading_task, "reading_task", 4096, NULL, 5, NULL);
+    xTaskCreate((TaskFunction_t)reading_task, "reading_task", 4096, NULL, 5, NULL);
   }
 }
 
@@ -146,7 +146,7 @@ int modbus_tcp_connect(uint16_t port, char* ip) {
   return sock;
 }
 
-static void modbus_tcp_request(int sock, uint8_t* pkt, size_t pkt_len) {
+static void modbus_tcp_request(int sock, const uint8_t* pkt, size_t pkt_len) {
   int flags = fcntl(sock, F_GETFL, 0);
   fcntl(sock, F_SETFL, flags | O_NONBLOCK);
 

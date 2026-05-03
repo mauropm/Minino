@@ -21,9 +21,6 @@
 #include "wifi_scanner.h"
 
 #define FILE_NAME                   WARFI_DIR_NAME "/Warfi"
-#define CSV_FILE_SIZE               8192
-#define CSV_HEADER_LINES            1
-#define MAX_CSV_LINES               20
 #define WIFI_SCAN_REFRESH_RATE_MS   3000
 #define DISPLAY_REFRESH_RATE_SEC    2
 #define WRITE_FILE_REFRESH_RATE_SEC 5
@@ -401,7 +398,7 @@ void wardriving_module_start_scan() {
   }
 
   task_manager_create(
-      wardriving_screens_wifi_animation_task, "wardriving_anim",
+      (TaskFunction_t)wardriving_screens_wifi_animation_task, "wardriving_anim",
       TASK_STACK_SMALL,  // Animaciones solo necesitan stack pequeño
       NULL,
       TASK_PRIORITY_LOW,  // UI baja prioridad

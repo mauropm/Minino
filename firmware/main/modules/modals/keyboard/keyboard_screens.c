@@ -1,3 +1,6 @@
+#define MAX(a,b) ((a)>(b)?(a):(b))
+#define MIN(a,b) ((a)<(b)?(a):(b))
+
 #include "keyboard_screens.h"
 
 #include "oled_screen.h"

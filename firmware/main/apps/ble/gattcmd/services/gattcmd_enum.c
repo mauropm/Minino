@@ -415,7 +415,7 @@ static void parse_address_colon(const char* str, uint8_t addr[6]) {
          &addr[3], &addr[4], &addr[5]);
 }
 
-void gattcmd_enum_begin(char* saddress) {
+void gattcmd_enum_begin(const char* saddress) {
   parse_address_colon(saddress, target_bda);
   // register the  callback function to the gap module
   esp_err_t ret = esp_ble_gap_register_callback(gattcmd_enum_gap_cb);

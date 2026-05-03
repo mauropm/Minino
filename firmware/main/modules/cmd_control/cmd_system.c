@@ -149,9 +149,7 @@ void cmd_control_register_system_commands() {
 
   esp_console_cmd_t get_reset_reason = {.command = "get_reset_reason",
                                         .help = "Get the reset reason",
-                                        .category = category,
-                                        .hint = NULL,
-                                        .category = category,
+                                        .category = category, .hint = NULL,
                                         .func = &print_reset_reason,
                                         .argtable = NULL};
 

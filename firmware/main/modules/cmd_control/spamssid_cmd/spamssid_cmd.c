@@ -78,7 +78,7 @@ static int save_ssid_cmd(int argc, char** argv) {
   }
   storage_contex_t new_ssid;
   new_ssid.main_storage_name = GENFLASH_STORAGE_SPAM;
-  new_ssid.item_storage_name = ssdi_save_args.name->sval[0];
+  new_ssid.item_storage_name = (char*)ssdi_save_args.name->sval[0];
   new_ssid.items_storage_value = malloc(GENFLASH_STORAGE_MAX_LEN_STR);
   strcpy(new_ssid.items_storage_value, ssdi_save_args.value->sval[0]);
   flash_storage_save_list_items(&new_ssid);
@@ -97,24 +97,24 @@ void cmd_spamssid_register_commands() {
   ssdi_delete_args.end = arg_end(1);
 
   esp_console_cmd_t spamssid_save_cmd = {
-      .command = "spam_save",
-      .help = "Save SSID for spam",
+      .command = (char*)"spam_save",
+      .help = (char*)"Save SSID for spam",
       .category = GENFLASH_STORAGE_SPAM,
       .hint = NULL,
       .func = &save_ssid_cmd,
       .argtable = &ssdi_save_args,
   };
   esp_console_cmd_t spamssid_delete_cmd = {
-      .command = "spam_delete",
-      .help = "Delete SSID for spam",
+      .command = (char*)"spam_delete",
+      .help = (char*)"Delete SSID for spam",
       .category = GENFLASH_STORAGE_SPAM,
       .hint = NULL,
       .func = &delete_ssid_cmd,
       .argtable = &ssdi_delete_args,
   };
   esp_console_cmd_t spamssid_show_cmd = {
-      .command = "spam_show",
-      .help = "Show SSID's list",
+      .command = (char*)"spam_show",
+      .help = (char*)"Show SSID's list",
       .category = GENFLASH_STORAGE_SPAM,
       .hint = NULL,
       .func = &show_ssid_cmd,

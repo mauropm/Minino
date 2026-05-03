@@ -16,7 +16,7 @@ static tracker_adv_cmp_t trackers[] = {
     {.name = "UATag", .vendor = "Apple", .adv_cmp = {0x4C, 0x00, 0x12, 0x19}},
     {.name = "Tile", .vendor = "Tile", .adv_cmp = {0x02, 0x01, 0x06, 0x0D}}};
 
-static void task_tracker_timer();
+static void task_tracker_timer(void *pvParameters);
 static void tracker_dissector(esp_ble_gap_cb_param_t* scan_rst,
                               tracker_profile_t* tracker_record);
 static void handle_bt_gapc_events(esp_gap_ble_cb_event_t event_type,
@@ -87,7 +87,7 @@ void trackers_scanner_register_cb(bluetooth_traker_scanner_cb_t callback) {
   display_records_cb = callback;
 }
 
-static void task_tracker_timer() {
+static void task_tracker_timer(void *pvParameters) {
   ESP_LOGI(TAG_BLE_CLIENT_MODULE, "Trackers task started");
   trackers_scan_duration = 0;
   while (trackers_scanner_active) {

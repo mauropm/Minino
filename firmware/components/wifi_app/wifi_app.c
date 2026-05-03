@@ -46,7 +46,7 @@ void wifi_ap_init(void) {
   ESP_ERROR_CHECK(esp_netif_set_ip_info(esp_netif_ap, &ap_ip_info));
   ESP_ERROR_CHECK(esp_netif_dhcps_start(esp_netif_ap));
   ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
-  ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &ap_config));
+    ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &ap_config));
   ESP_ERROR_CHECK(esp_wifi_set_bandwidth(WIFI_IF_AP, WIFI_AP_BANDWIDTH));
   ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_STA_POWER_SAVE));
 

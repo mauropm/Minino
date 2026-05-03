@@ -71,7 +71,7 @@ modbus_dos_prefs_t* modubs_dos_prefs_get_prefs() {
   return mb_dos_prefs;
 }
 
-void modbus_dos_prefs_set_ssid(char* ssid) {
+void modbus_dos_prefs_set_ssid(const char* ssid) {
   if (!mb_dos_prefs) {
     modbus_dos_prefs_begin();
   }
@@ -80,7 +80,7 @@ void modbus_dos_prefs_set_ssid(char* ssid) {
 
   save_prefs();
 }
-void modbus_dos_prefs_set_pass(char* pass) {
+void modbus_dos_prefs_set_pass(const char* pass) {
   if (!mb_dos_prefs) {
     modbus_dos_prefs_begin();
   }
@@ -88,7 +88,7 @@ void modbus_dos_prefs_set_pass(char* pass) {
   mb_dos_prefs->pass[PASS_MAX_LEGHT - 1] = '\0';
   save_prefs();
 }
-void modbus_dos_prefs_set_ip(char* ip) {
+void modbus_dos_prefs_set_ip(const char* ip) {
   if (!mb_dos_prefs) {
     modbus_dos_prefs_begin();
   }

@@ -327,9 +327,7 @@ static void parse_address_colon(const char* str, uint8_t addr[6]) {
          &addr[3], &addr[4], &addr[5]);
 }
 
-void gattcmd_write_begin(char* saddress,
-                         uint16_t target_uuid,
-                         char* value_str) {
+void gattcmd_write_begin(const char* saddress, uint16_t target_uuid, const char* value_str) {
   parse_address_colon(saddress, target_bda);
   gatt_target_value_len = hex_string_to_bytes(value_str, gatt_target_value,
                                               sizeof(gatt_target_value));

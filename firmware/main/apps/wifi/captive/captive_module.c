@@ -229,7 +229,7 @@ static void wifi_init_softap(void) {
   }
 
   ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
-  ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &wifi_config));
+  ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
   ESP_ERROR_CHECK(esp_wifi_start());
 
   esp_wifi_set_channel(preferences_get_int(CAPTIVE_PORTAL_CHANNEL, 12) - 1,
@@ -824,7 +824,7 @@ static void captive_module_show_aps_list() {
   general_submenu(ap_list);
 }
 
-static void scanning_task() {
+static void scanning_task(void *pvParameters) {
   ap_records = wifi_scanner_get_ap_records();
   while ((ap_records->count < (DEFAULT_SCAN_LIST_SIZE / 4)) &
          (retries < MAX_RETRIES)) {
@@ -905,7 +905,7 @@ static void exit_main() {
   menus_module_restart();
 }
 
-void captive_module_change_ap_name(char* name) {
+void captive_module_change_ap_name(const char* name) {
   preferences_put_string(CAPTIVE_PORTAL_FS_NAME, name);
 }
 

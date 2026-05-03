@@ -58,7 +58,7 @@ static void sleep_mode_light_sleep() {
   }
 }
 
-static void timer_callback() {
+static void timer_callback(void *arg) {
   if (menus_module_get_app_state() || !sleep_mode_enabled) {
     return;
   }

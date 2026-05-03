@@ -16,7 +16,7 @@ static esp_timer_handle_t screen_saver_idle_timer;
 
 void screen_saver_run();
 
-static void timer_callback() {
+static void timer_callback(void *arg) {
   if (menus_module_get_app_state() || screen_saver_running) {
     return;
   }
@@ -31,12 +31,12 @@ static void timer_callback() {
   screen_saver_run();
 }
 
-static void show_splash_screen() {
+static void show_splash_screen(void *pvParameters) {
   uint8_t screen_savers_count = sizeof(screen_savers) / sizeof(epd_bitmap_t*);
   int get_logo =
       MIN(screen_savers_count - 1, preferences_get_int("dp_select", 0));
   epd_bitmap_t* logo;
-  logo = screen_savers[get_logo];
+  logo = (epd_bitmap_t*)screen_savers[get_logo];
 
   screen_saver_running = true;
   int w_screen_space = SCREEN_WIDTH2 - logo->width;
@@ -73,7 +73,7 @@ static void show_splash_screen() {
 
 void screen_saver_run() {
   oled_screen_clear();
-  xTaskCreate(show_splash_screen, "show_splash_screen", 4096, NULL, 5, NULL);
+  xTaskCreate((TaskFunction_t)show_splash_screen, "show_splash_screen", 4096, NULL, 5, NULL);
 }
 
 void screen_saver_stop() {

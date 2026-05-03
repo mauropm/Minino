@@ -69,7 +69,7 @@ uint16_t hex_string_to_uint16(const char* hex_str) {
   return (uint16_t) strtol(hex_str, NULL, 16);
 }
 
-void gattcmd_module_gatt_write(char* saddress, char* gatt, char* value) {
+void gattcmd_module_gatt_write(const char* saddress, const char* gatt, const char* value) {
   if (initialized) {
     gattcmd_scan_stop();
     gattcmd_enum_stop();
@@ -88,7 +88,7 @@ void gattcmd_module_set_remote_address(char* saddress) {
   parse_address_colon(saddress, target);
 }
 
-void gattcmd_module_enum_client(char* saddress) {
+void gattcmd_module_enum_client(const char* saddress) {
   if (initialized) {
     gattcmd_scan_stop();
     gattcmd_enum_stop();

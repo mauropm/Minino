@@ -28,10 +28,10 @@ set(argtable_srcs argtable3/arg_cmd.c
 
 
 idf_component_register(SRCS ${srcs}
-                            ${argtable_srcs}
-                    INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-                    PRIV_INCLUDE_DIRS private_include
-                    REQUIRES vfs esp_vfs_console
-                    PRIV_REQUIRES esp_driver_uart
-                                  esp_driver_usb_serial_jtag
-                    )
+    ${argtable_srcs}
+    INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIV_INCLUDE_DIRS private_include
+    REQUIRES vfs esp_usb_cdc_rom_console
+    PRIV_REQUIRES esp_driver_uart
+    esp_driver_usb_serial_jtag
+)

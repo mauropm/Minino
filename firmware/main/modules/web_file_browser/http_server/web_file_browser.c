@@ -207,7 +207,7 @@ esp_err_t list_files_handler(httpd_req_t* req) {
   size_t query_len = 300;
   char* query_str = (char*) malloc(query_len);
   if (httpd_req_get_url_query_str(req, query_str, query_len) == ESP_OK) {
-    if (httpd_query_key_value(query_str, "root", mount_path,
+    if (httpd_query_key_value(query_str, "root", (char*)mount_path,
                               WFB_MOUNT_PATH_LEN) == ESP_OK) {
       strncpy(path, mount_path, WFB_MOUNT_PATH_LEN);
     } else if (httpd_query_key_value(query_str, "path", path, path_len) !=

@@ -9,10 +9,10 @@
 #define TAG "Modbus_attacks"
 
 static connection_callback connection_cb;
-void modbus_attacks_dos();
+void modbus_attacks_dos(connection_callback cb);
 static volatile bool attacking = false;
 
-static void writer_task() {
+static void writer_task(void *pvParameters) {
   attacking = true;
   if (modbus_engine_connect() < 0) {
     ESP_LOGE(TAG, "Connection Failed");
@@ -55,7 +55,7 @@ bool modbus_attacks_writer_single() {
 
 /////////////////////////////////// DOS ////////////////////////////////////
 
-static void dos_task() {
+static void dos_task(void *pvParameters) {
   attacking = true;
   if (modbus_engine_connect() < 0) {
     attacking = false;

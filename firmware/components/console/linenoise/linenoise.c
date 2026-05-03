@@ -108,10 +108,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "sdkconfig.h"
-#if !CONFIG_IDF_TARGET_LINUX
-  // On Linux, we don't need __fbufsize (see comments below), and
-  // __fbufsize not available on MacOS (which is also considered "Linux" target)
-  #include <stdio_ext.h>  // for __fbufsize
+#if !CONFIG_IDF_TARGET_LINUX && !defined(__APPLE__)
+#include <stdio_ext.h> // for __fbufsize
 #endif
 #include <assert.h>
 #include <ctype.h>
@@ -225,15 +223,17 @@ bool linenoiseIsDumbMode(void) {
 }
 
 static void flushWrite(void) {
-// On Linux, we set stdout to unbuffered mode to facilitate interaction with
-// tools. Performance on Linux is not considered as critical as on chip targets.
-// Additionally, MacOS does not have __fbufsize.
-#if !CONFIG_IDF_TARGET_LINUX
-  if (__fbufsize(stdout) > 0) {
+    // On Linux, we set stdout to unbuffered mode to facilitate interaction with
+    // tools. Performance on Linux is not considered as critical as on chip targets.
+    // Additionally, MacOS does not have __fbufsize.
+#if CONFIG_IDF_TARGET_ESP32C6
     fflush(stdout);
-  }
+#elif !CONFIG_IDF_TARGET_LINUX && !defined(__APPLE__)
+    if (__fbufsize(stdout) > 0) {
+        fflush(stdout);
+    }
 #endif
-  fsync(fileno(stdout));
+    fsync(fileno(stdout));
 }
 
 /* Use the ESC [6n escape sequence to query the horizontal cursor position

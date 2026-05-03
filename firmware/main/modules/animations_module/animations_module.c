@@ -106,7 +106,7 @@ static void draw_frame() {
     xSemaphoreGive(anim_mutex);
     return;
   }
-  bitmap_t* bitmap = &anim_ctx->animation->bitmaps[actual_frame];
+        bitmap_t* bitmap = (bitmap_t*)&anim_ctx->animation->bitmaps[actual_frame];
 
   oled_screen_buffer_bitmap(bitmap->bitmap, anim_ctx->x, anim_ctx->y,
                             bitmap->width, bitmap->height, anim_ctx->invert);
@@ -121,7 +121,7 @@ static void draw_frame() {
   xSemaphoreGive(anim_mutex);
 }
 
-static void animation_task() {
+static void animation_task(void *pvParameters) {
   set_running(true);
   while (get_running()) {
     draw_frame();
@@ -225,7 +225,7 @@ void animations_module_run(animations_module_ctx_t ctx) {
   anim_ctx->manual_clear = ctx.manual_clear;
   anim_ctx->manual_show = ctx.manual_show;
 
-  xTaskCreate(animation_task, "animation_task", 4096, NULL, 10,
+  xTaskCreate((TaskFunction_t)animation_task, "animation_task", 4096, NULL, 10,
               &anim_ctx->task_handle);
 
   xSemaphoreGive(anim_mutex);

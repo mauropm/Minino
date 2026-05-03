@@ -1,5 +1,6 @@
 #include "files_ops.h"
 
+#include <stdlib.h>
 #include <sys/stat.h>
 
 #define KB (1024)

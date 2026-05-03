@@ -8,10 +8,10 @@
 #define GATTCMD_ENUM_APP_ID  0
 #define INVALID_HANDLE       0
 
-void gattcmd_enum_begin(char* saddress);
-void gattcmd_write_begin(char* saddress, uint16_t target_uuid, char* value_str);
+void gattcmd_enum_begin(const char* saddress);
+void gattcmd_write_begin(const char* saddress, uint16_t target_uuid, const char* value_str);
 void gattcmd_scan_begin();
-void gattcmd_recon_begin();
+void gattcmd_recon_begin(const char* bt_addr_str);
 
 void gattcmd_scan_stop();
 void gattcmd_enum_stop();

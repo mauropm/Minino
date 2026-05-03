@@ -136,7 +136,7 @@ static void scroll_text_ctx_free() {
   if (scroll_text_ctx) {
     if (scroll_text_ctx->text) {
       for (uint16_t i = 0; i < scroll_text_ctx->text_len; ++i) {
-        free(scroll_text_ctx->text_arr[i]);
+        free((void*)scroll_text_ctx->text_arr[i]);
       }
       free(scroll_text_ctx->text_arr);
     }

@@ -8,7 +8,7 @@ static void show_ready() {
   bool is_connected = preferences_get_bool("wifi_connected", false);
   if (is_connected) {
     wifi_config_t wifi_config;
-    esp_wifi_get_config(ESP_IF_WIFI_STA, &wifi_config);
+    esp_wifi_get_config(WIFI_IF_STA, &wifi_config);
     oled_screen_display_text("< Exit", 0, 0, OLED_DISPLAY_NORMAL);
     oled_screen_display_text("SSID:", 0, 2, OLED_DISPLAY_NORMAL);
     oled_screen_display_text((char*) wifi_config.sta.ssid, 0, 3,

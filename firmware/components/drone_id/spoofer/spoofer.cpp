@@ -1,3 +1,4 @@
+#include <cmath>
 #include "spoofer.h"
 
 #include "esp_timer.h"
@@ -66,7 +67,7 @@ void Spoofer::update() {
   // update the actual speed in knots
   // double absolute_speed = sqrt(pow(speed_m_x, 2) + pow(speed_m_y, 2));
   double absolute_speed =
-      std::sqrt(std::pow(speed_m_x, 2) + std::pow(speed_m_y, 2));
+      std::sqrtf(std::powf(speed_m_x, 2) + std::powf(speed_m_y, 2));
   utm_data.speed_kn = speed_ms2kn * absolute_speed;
 
   // compute the heading based on speed

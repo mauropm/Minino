@@ -46,13 +46,13 @@ static void deauth_module_cb_event_run(uint8_t button_name,
 
 static TaskHandle_t scanning_task_handle = NULL;
 
-static void scanning_task();
+static void scanning_task(void *pvParameters);
 static void deauth_run_scan_task();
 static void deauth_increment_item();
 static void deauth_decrement_item();
 static void deauth_handle_attacks();
 
-static void scanning_task() {
+static void scanning_task(void *pvParameters) {
   uint8_t scan_count = 0;
   while (ap_records->count < (DEFAULT_SCAN_LIST_SIZE / 2)) {
     wifi_scanner_module_scan();

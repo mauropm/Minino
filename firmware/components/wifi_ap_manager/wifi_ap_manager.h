@@ -14,7 +14,7 @@
 #define WIFI_AP_IP              "192.168.0.1"
 #define WIFI_AP_GATEWAY         "192.168.0.1"
 #define WIFI_AP_NETMASK         "255.255.255.0"
-#define WIFI_AP_BANDWIDTH       WIFI_BW_HT20
+#define WIFI_AP_BANDWIDTH       WIFI_BW20
 #define WIFI_STA_POWER_SAVE     WIFI_PS_NONE
 #define WIFI_AUTH_MODE          WIFI_AUTH_WPA2_PSK
 

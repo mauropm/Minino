@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 typedef struct {
-  char* head;
-  char* body;
+  const char* head;
+  const char* body;
   void (*on_enter)();
   void (*on_exit)();
   uint32_t duration_ms;

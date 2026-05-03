@@ -92,7 +92,7 @@ esp_err_t wifi_module_init_sniffer() {
         wifi_sniffer_set_destination_internal();
         break;
       default:
-        ESP_LOGE(TAG, "SD card mount failed: reason: %s", esp_err_to_name(err));
+        ESP_LOGE(TAG, "SD card mount failed: reason: %s", esp_err_to_name(err)); break;
       case ESP_ERR_NOT_FOUND:
         ESP_LOGW(TAG, "SD card not found");
         wifi_screeens_show_sd_not_found();

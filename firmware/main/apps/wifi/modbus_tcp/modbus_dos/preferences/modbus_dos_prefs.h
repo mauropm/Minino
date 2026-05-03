@@ -13,9 +13,9 @@ typedef struct {
 
 void modbus_dos_prefs_begin();
 bool modbus_dos_prefs_check();
-void modbus_dos_prefs_set_ssid(char* ssid);
-void modbus_dos_prefs_set_pass(char* pass);
-void modbus_dos_prefs_set_ip(char* ip);
+void modbus_dos_prefs_set_ssid(const char* ssid);
+void modbus_dos_prefs_set_pass(const char* pass);
+void modbus_dos_prefs_set_ip(const char* ip);
 void modbus_dos_prefs_set_port(uint16_t port);
 void modbus_dos_prefs_print_prefs();
 

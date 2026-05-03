@@ -646,7 +646,7 @@ int ID_OpenDrone::transmit_wifi(struct UTM_data* utm_data, int prepacked) {
 
   //
 
-  if (++sequence > 0xffffff) {
+  if (++sequence > 0xfffe) {
     sequence = 1;
   }
 
