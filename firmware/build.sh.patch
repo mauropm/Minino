@@ -1,0 +1,17 @@
+--- a/firmware/build.sh
++++ b/firmware/build.sh
+@@ -287,6 +287,14 @@ load_idf_environment() {
+     
+     # Source export.sh to set up environment
+     print_status "Sourcing ESP-IDF environment: $IDF_PATH/export.sh"
++    
++    # Set Python version for ESP-IDF 5.x (needs Python 3.11)
++    if [ -d "$HOME/.espressif/python_env/idf5_py3.11_env" ]; then
++        export VIRTUAL_ENV="$HOME/.espressif/python_env/idf5_py3.11_env"
++        export PATH="$VIRTUAL_ENV/bin:$PATH"
++        print_info "Using Python 3.11 environment: $VIRTUAL_ENV"
++    fi
++    
+     . "$IDF_PATH/export.sh"
+     
+     # Brief pause to allow environment to settle

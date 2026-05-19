@@ -10,6 +10,7 @@
 #include <string.h>
 #include <sys/fcntl.h>
 #include <sys/unistd.h>
+#include <inttypes.h>
 #include "argtable3/argtable3.h"
 #include "cmd_pcap.h"
 #include "esp_app_trace.h"
@@ -137,9 +138,9 @@ static bool should_stop_flash_sniffing(int32_t sniffed_packets) {
     ESP_LOGW(TAG, "Failed to get flash info, using fallback limit");
     // Use fallback limit if we can't get flash info
     if (sniffed_packets >= PCAP_FLASH_MAX_PACKETS) {
-      ESP_LOGW(TAG, "Flash packet limit reached (%d packets)",
-               PCAP_FLASH_MAX_PACKETS);
-      return true;
+        ESP_LOGW(TAG, "Flash packet limit reached (%" PRIu32 " packets)",
+                (uint32_t)PCAP_FLASH_MAX_PACKETS);
+        return true;
     }
     return false;
   }
@@ -171,26 +172,26 @@ static bool should_stop_flash_sniffing(int32_t sniffed_packets) {
     return true;
   }
 
-  // Check if we've reached the calculated limit
-  if (sniffed_packets >= (int32_t) max_packets) {
-    ESP_LOGW(TAG,
-             "Flash packet limit reached: %d packets (calculated from %zu "
-             "bytes free)",
-             max_packets, free_size);
-    return true;
-  }
-
-  // Additional check: if we're getting close to the limit, check more
-  // frequently This helps prevent system freeze by stopping earlier
-  if (sniffed_packets >= (int32_t) (max_packets * 0.9)) {
-    // Re-check available space more aggressively near the limit
-    size_t current_free = total_size - used_size;
-    if (current_free < (PCAP_FLASH_MIN_FREE_BYTES * 1.2)) {
-      ESP_LOGW(TAG, "Approaching flash limit: %d/%d packets, %zu bytes free",
-               sniffed_packets, max_packets, current_free);
-      return true;
+    // Check if we've reached the calculated limit
+    if (sniffed_packets >= (int32_t) max_packets) {
+        ESP_LOGW(TAG,
+                "Flash packet limit reached: %" PRIu32 " packets (calculated from %zu "
+                "bytes free)",
+                max_packets, free_size);
+        return true;
     }
-  }
+
+    // Additional check: if we're getting close to the limit, check more
+    // frequently This helps prevent system freeze by stopping earlier
+    if (sniffed_packets >= (int32_t) (max_packets * 0.9)) {
+        // Re-check available space more aggressively near the limit
+        size_t current_free = total_size - used_size;
+        if (current_free < (PCAP_FLASH_MIN_FREE_BYTES * 1.2)) {
+            ESP_LOGW(TAG, "Approaching flash limit: %" PRId32 "/%" PRIu32 " packets, %zu bytes free",
+                    (int32_t)sniffed_packets, max_packets, current_free);
+            return true;
+        }
+    }
 
   return false;
 }
